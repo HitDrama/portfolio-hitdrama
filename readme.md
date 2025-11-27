@@ -1,6 +1,6 @@
-# henryheffernan.com
+# portfolio.dangtonhan.online
 
-This is one of two repositories created for my portfolio website <a href="https://henryheffernan.com/"><samp>henryheffernan.com</samp></a>. If you are looking for the 2D OS repository you can find it <a href="https://github.com/henryjeff/portfolio-inner-site"><samp>here</samp></a>! Thanks for taking the time to check this out. If you have any questions of comments, feel free to shoot me an email at <samp><a href="mailto:henryheffernan@gmail.com">henryheffernan@gmail.com</a></samp> or you can DM me on twitter <a href="https://twitter.com/henryheffernan"><samp>@henryheffernan</samp></a>.
+This is the repository for my portfolio website <a href="https://portfolio.dangtonhan.online/"><samp>portfolio.dangtonhan.online</samp></a>! Thanks for taking the time to check this out. If you have any questions of comments, feel free to shoot me an email at <samp><a href="mailto:dangtonhan2002@gmail.com">dangtonhan2002@gmail.com</a></samp>.
 
 <br>
 
