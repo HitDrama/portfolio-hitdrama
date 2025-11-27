@@ -1,0 +1,42 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main # Chỉ chạy khi có push lên nhánh main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+        script: |
+          # Di chuyển đến thư mục dự án trên VPS
+          cd /root/portfolio-website
+          
+          # Đảm bảo git không hỏi mật khẩu
+          git config --global credential.helper store
+          
+          # Kéo code mới nhất từ nhánh main
+          git pull origin main
+          
+          # Cài đặt lại dependencies nếu có thay đổi trong package.json
+          npm install
+          
+          # Build lại dự án (dựa trên package.json của bạn)
+          # Nếu lệnh build khác, hãy cập nhật tại đây
+          npm run build
+          
+          # Khởi động lại ứng dụng bằng PM2
+          # 'portfolio-app' là tên gợi ý, hãy chắc chắn nó khớp với tên bạn dùng
+          pm2 restart portfolio-app || pm2 start ./server/index.ts --name portfolio-app
+
