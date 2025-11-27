@@ -19,24 +19,25 @@ jobs:
         host: ${{ secrets.VPS_HOST }}
         username: ${{ secrets.VPS_USER }}
         key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+
+
         script: |
-          # Di chuyển đến thư mục dự án trên VPS
+          # Bước 1: Tải NVM (Node Version Manager) để sử dụng npm và pm2
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+       
+          # Bước 2: Di chuyển đến thư mục dự án
           cd /root/portfolio-website
-          
-          # Đảm bảo git không hỏi mật khẩu
-          git config --global credential.helper store
-          
-          # Kéo code mới nhất từ nhánh main
+       
+          # Bước 3: Kéo code mới nhất từ nhánh main
           git pull origin main
-          
-          # Cài đặt lại dependencies nếu có thay đổi trong package.json
+      
+          # Bước 4: Cài đặt hoặc cập nhật các dependencies
           npm install
-          
-          # Build lại dự án (dựa trên package.json của bạn)
-          # Nếu lệnh build khác, hãy cập nhật tại đây
+      
+          # Bước 5: Build lại dự án
           npm run build
-          
-          # Khởi động lại ứng dụng bằng PM2
-          # 'portfolio-app' là tên gợi ý, hãy chắc chắn nó khớp với tên bạn dùng
-          pm2 restart portfolio-app || pm2 start ./server/index.ts --name portfolio-app
+      
+          # Bước 6: Khởi động lại ứng dụng bằng PM2
+          pm2 restart portfolio-app
 
